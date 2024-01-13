@@ -11,4 +11,5 @@ class AppConst {
 
   static double appWidth = 375.w;
   static double appHeight = 825.h;
+  static double appRadius = 10.h;
 }
