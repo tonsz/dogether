@@ -7,7 +7,7 @@ class CustomTextField extends StatelessWidget {
       {super.key,
       required this.keyboardType,
       required this.controller,
-      required this.onChanged,
+      this.onChanged,
       required this.hintText,
       this.prefixIcon,
       this.suffixIcon,
@@ -26,7 +26,8 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppConst.appWidth * 0.7,
+      width: AppConst.appWidth * 0.9,
+      // 0.7 for login page
       decoration: BoxDecoration(
         color: AppConst.prLight,
         borderRadius: BorderRadius.all(
