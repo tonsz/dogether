@@ -86,6 +86,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           HeightSpacer(ht: 20.h),
           OutlinedBox(
             onTap: () => context.push('/list/123'),
+            height: AppConst.appHeight * 0.1,
             child: const ListTitle(
                 listName: "Home Chores",
                 listDate: "Jan 5",

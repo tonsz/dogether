@@ -1,7 +1,10 @@
 import 'package:dogether/common/utils/constants.dart';
+import 'package:dogether/common/widgets/custom_outlined_box.dart';
 import 'package:dogether/common/widgets/custom_text.dart';
 import 'package:dogether/common/widgets/custom_text_style.dart';
+import 'package:dogether/common/widgets/height_spacer.dart';
 import 'package:dogether/features/dogether/widgets/custom_fab.dart';
+import 'package:dogether/features/dogether/widgets/task_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -98,6 +101,7 @@ class _ListPageState extends ConsumerState<ListPage>
               ],
             ),
           ),
+          HeightSpacer(ht: 20.h),
         ],
       ),
       floatingActionButton: const CustomFloatingActionButton(),

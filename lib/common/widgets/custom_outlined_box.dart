@@ -2,9 +2,11 @@ import 'package:dogether/common/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class OutlinedBox extends StatelessWidget {
-  const OutlinedBox({super.key, required this.child, this.onTap});
+  const OutlinedBox(
+      {super.key, required this.child, this.onTap, required this.height});
 
   final Widget child;
+  final double height;
   final void Function()? onTap;
 
   @override
@@ -23,7 +25,7 @@ class OutlinedBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppConst.appRadius),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           child: child,
         ),
       ),
