@@ -1,6 +1,6 @@
 # dogether
 
-A new Flutter project.
+A new Flutter project, a simple shared to-do list CRUD app. 
 
 ## Getting Started
 
