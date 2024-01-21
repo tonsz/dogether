@@ -1,19 +1,27 @@
 class UserModel {
-  final String greeting;
-  final List<String> instructions;
+  int? id;
+  String? name;
+  int? isVerified;
+  String? photoUrl;
 
   UserModel({
-    required this.greeting,
-    required this.instructions,
+    this.id,
+    this.name,
+    this.isVerified,
+    this.photoUrl,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        greeting: json["greeting"],
-        instructions: List<String>.from(json["instructions"].map((x) => x)),
+        id: json["id"],
+        name: json["name"],
+        isVerified: json["isVerified"],
+        photoUrl: json["photoUrl"],
       );
 
   Map<String, dynamic> toJson() => {
-        "greeting": greeting,
-        "instructions": List<dynamic>.from(instructions.map((x) => x)),
+        "id": id,
+        "name": name,
+        "isVerified": isVerified,
+        "photoUrl": photoUrl,
       };
 }
