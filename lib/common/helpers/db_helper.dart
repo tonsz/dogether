@@ -13,7 +13,7 @@ class DBHelper {
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name TEXT,
           isVerified INTEGER NOT NULL,
-          photoUrl TEXT,
+          photoUrl TEXT
         )    
 
     ''');
@@ -21,9 +21,10 @@ class DBHelper {
         CREATE TABLE list (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name TEXT NOT NULL,
-          creatorId INTEGER NOT NULL,
+          creatorId INTEGER,
+          dateCreated STRING
 
-          FOREIGN KEY(creatorId) REFERENCES user(id)
+      
         )
     
     ''');
@@ -37,7 +38,7 @@ class DBHelper {
           ownerId INTEGER NOT NULL,
           listId INTEGER NOT NULL,
 
-          FOREIGN KEY(ownerId) REFERENCES user(id)
+          FOREIGN KEY(ownerId) REFERENCES user(id),
           FOREIGN KEY(listId) REFERENCES list(id)
         )
     
