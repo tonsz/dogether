@@ -106,7 +106,7 @@ class MyLists extends ConsumerWidget {
     // var myLists = listData.where((element) => element.creatorId == 1);
 
     return ListView.builder(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: 40,
         right: 40,
         bottom: 40,
@@ -117,7 +117,7 @@ class MyLists extends ConsumerWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 20),
           child: OutlinedBox(
-            onTap: () => context.push('/list/:${data.id}'),
+            onTap: () => context.push('/list/:${data.id}', extra: data),
             height: AppConst.appHeight * 0.1,
             child: ListTitle(
                 listName: data.name!,

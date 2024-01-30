@@ -35,10 +35,9 @@ class DBHelper {
           desc TEXT,
           isCompleted INTEGER NOT NULL, 
           date TEXT,
-          ownerId INTEGER NOT NULL,
+          ownerId INTEGER,
           listId INTEGER NOT NULL,
 
-          FOREIGN KEY(ownerId) REFERENCES user(id),
           FOREIGN KEY(listId) REFERENCES list(id)
         )
     
@@ -81,10 +80,11 @@ class DBHelper {
     return id;
   }
 
-  static Future<List<Map<String, dynamic>>> getTasks() async {
+  static Future<List<Map<String, dynamic>>> getTasks(int lid) async {
     final db = await DBHelper.db();
 
-    return db.query('task', orderBy: 'id');
+    return db.query('task',
+        where: 'listId = ?', whereArgs: [lid], orderBy: 'id');
   }
 
   static Future<List<Map<String, dynamic>>> getTask(int id) async {
