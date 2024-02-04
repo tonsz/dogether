@@ -56,6 +56,8 @@ class _AddListState extends ConsumerState<AddList> {
             CustomTextField(
               controller: listName,
               hintText: "Enter list name",
+              hintStyle:
+                  customTextStyle(16, AppConst.prGray, FontWeight.normal),
               keyboardType: TextInputType.name,
             ),
             HeightSpacer(ht: 20.h),

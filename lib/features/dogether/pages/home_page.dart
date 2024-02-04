@@ -49,6 +49,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                   keyboardType: TextInputType.text,
                   controller: search,
                   hintText: "Search...",
+                  hintStyle:
+                      customTextStyle(16, AppConst.prGray, FontWeight.normal),
                   prefixIcon: Container(
                     child: GestureDetector(
                       onTap: null,

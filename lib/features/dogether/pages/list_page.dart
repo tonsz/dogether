@@ -10,6 +10,7 @@ import 'package:dogether/features/dogether/widgets/custom_fab.dart';
 import 'package:dogether/features/dogether/widgets/task_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -111,7 +112,15 @@ class _ListPageState extends ConsumerState<ListPage>
           ),
         ),
       ),
-      body: MyTasks(),
+      body: Container(
+        child: TabBarView(
+          controller: tabController,
+          children: const [
+            MyTasks(status: 0),
+            MyTasks(status: 1),
+          ],
+        ),
+      ),
       floatingActionButton: CustomFloatingActionButton(
         onPressed: () => context.push(
           '/add_task/:$listId',
@@ -124,30 +133,79 @@ class _ListPageState extends ConsumerState<ListPage>
 
 class MyTasks extends ConsumerWidget {
   const MyTasks({
+    this.status,
     super.key,
   });
+
+  final int? status;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<TaskModel> tasksData = ref.watch(taskStateProvider);
 
+    var tasks =
+        tasksData.where((element) => element.isCompleted == status).toList();
+
     return ListView.builder(
       padding: const EdgeInsets.only(
+        top: 10,
         left: 40,
         right: 40,
         bottom: 40,
       ),
-      itemCount: tasksData.length,
+      itemCount: tasks.length,
       itemBuilder: (context, index) {
-        final data = tasksData[index];
+        final data = tasks[index];
+        bool isCompleted = ref.read(taskStateProvider.notifier).getStatus(data);
+
         return Padding(
           padding: const EdgeInsets.only(top: 20),
-          child: OutlinedBox(
-            onTap: () {},
-            height: AppConst.appHeight * 0.1,
-            child: TaskTitle(
-              taskName: data.title,
-              taskDate: data.date,
+          child: GestureDetector(
+            child: Slidable(
+              startActionPane: ActionPane(
+                extentRatio: 0.25,
+                motion: ScrollMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (BuildContext context) {
+                      ref
+                          .read(taskStateProvider.notifier)
+                          .deleteTask(data.id!, data.listId!);
+                    },
+                    backgroundColor: Colors.transparent,
+                    foregroundColor: AppConst.secTan,
+                    icon: Icons.delete,
+                  ),
+                ],
+              ),
+              child: OutlinedBox(
+                onTap: () {},
+                height: AppConst.appHeight * 0.1,
+                child: TaskTitle(
+                  taskName: data.title,
+                  taskDate: data.date,
+                  switcher: status == 0
+                      ? Checkbox(
+                          shape: const CircleBorder(),
+                          value: isCompleted,
+                          onChanged: (bool? value) {
+                            ref.read(taskStateProvider.notifier).changeStatus(
+                                data.id!,
+                                data.title!,
+                                data.desc!,
+                                data.isCompleted!,
+                                data.date!,
+                                data.ownerId!,
+                                data.listId!);
+                          },
+                        )
+                      : Checkbox(
+                          shape: const CircleBorder(),
+                          value: true,
+                          onChanged: (value) {},
+                        ),
+                ),
+              ),
             ),
           ),
         );

@@ -61,6 +61,8 @@ class _AddTaskState extends ConsumerState<AddTask> {
             CustomTextField(
               controller: taskName,
               hintText: "New Task",
+              hintStyle:
+                  customTextStyle(16, AppConst.prGray, FontWeight.normal),
               keyboardType: TextInputType.name,
             ),
             HeightSpacer(ht: 20.h),

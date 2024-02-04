@@ -21,6 +21,36 @@ class TaskState extends _$TaskState {
     refresh(lid);
   }
 
+  void changeStatus(int id, String title, String desc, int isCompleted,
+      String date, int ownerId, int listId) async {
+    int newStatus;
+    if (isCompleted == 0) {
+      newStatus = 1;
+    } else {
+      newStatus = 0;
+    }
+    await DBHelper.updateTask(
+        id, title, desc, newStatus, date, ownerId, listId);
+
+    refresh(listId);
+  }
+
+  bool getStatus(TaskModel data) {
+    bool? isCompleted;
+
+    if (data.isCompleted == 0) {
+      isCompleted = false;
+    } else {
+      isCompleted = true;
+    }
+
+    return isCompleted;
+  }
+
+  bool isVisible(bool visible) {
+    return visible;
+  }
+
   Future<void> deleteTask(int id, int lid) async {
     await DBHelper.deleteTask(id);
     refresh(lid);
